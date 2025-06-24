@@ -1,0 +1,11 @@
+services:
+  desmume:
+    container_name: desmume-cli
+    build: .
+    volumes:
+      - ./roms:/roms
+      - ./fs:/fs
+    environment:
+      - DISPLAY=$DISPLAY
+      - XDG_RUNTIME_DIR=/tmp/xdg
+    entrypoint: sh -c "/desmume/desmume/src/frontend/posix/build/cli/desmume-cli /roms/rom.nds --disable-sound --cflash-image /fs/fat.img"

@@ -1,5 +1,6 @@
 
 export ROOT="$(cd "$(dirname "$(realpath "$0")")/.." &>/dev/null && pwd)"
+echo "Root folder is ${ROOT}"
 
 mount "${ROOT}/fs/fat.img" "${ROOT}/fs/mountpoint"
 
@@ -14,7 +15,7 @@ fi
 umount "${ROOT}/fs/mountpoint"
 {
   cd "${ROOT}"
-  BUILDKIT_PROGRESS=plain docker compose up -d
+  BUILDKIT_PROGRESS=plain docker compose up --build -d
 }
 
 mount "${ROOT}/fs/fat.img" "${ROOT}/fs/mountpoint"

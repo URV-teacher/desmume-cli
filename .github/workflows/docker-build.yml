@@ -29,8 +29,7 @@ jobs:
       # Step 4: Build the watchdog image (custom Dockerfile)
       - name: Build watchdog Docker image
         run: |
-          docker build -t aleixmt/desmume
-          -watchdog:latest -f watchdog.Dockerfile .
+          docker build -t aleixmt/desmume-watchdog:latest -f watchdog.Dockerfile .
 
       # Step 5: Push the main image
       - name: Push main Docker image

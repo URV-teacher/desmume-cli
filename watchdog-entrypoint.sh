@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TARGET_CONTAINER="runner-cli"
-CONDITION_FILE="output.txt"
+CONDITION_FILE="EXIT_CODE"
 IMG_PATH="/fs/fat.img"
 
 echo "[Watchdog] Monitoring for condition..."

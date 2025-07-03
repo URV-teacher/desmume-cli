@@ -45,3 +45,8 @@ RUN apt-get update && apt-get install -y \
 
 # Copy the compiled binary from the builder stage
 COPY --from=build /tmp/DeSmuME/usr/bin/desmume-cli /usr/bin
+
+# Change to use custom entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

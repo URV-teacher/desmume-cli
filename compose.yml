@@ -1,11 +1,23 @@
 services:
-  desmume:
-    container_name: desmume-cli
-    build: .
+  runner-cli:
+    container_name: runner-cli
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./roms:/roms
+      - ./roms:/roms/
       - ./fs:/fs
-    environment:
-      - DISPLAY=$DISPLAY
-      - XDG_RUNTIME_DIR=/tmp/xdg
-    entrypoint: sh -c "desmume-cli /roms/rom.nds --disable-sound --cflash-image /fs/fat.img"
+    #entrypoint: sh -c "desmume-cli /roms/rom.nds --disable-sound --cflash-image /fs/fat.img"
+
+  watchdog:
+    container_name: wathdog
+    build:
+      context: .
+      dockerfile: watchdog.Dockerfile
+    volumes:
+      - ./fs:/fs
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - runner-cli
+    restart: "no"
+    privileged: true

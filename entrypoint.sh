@@ -1,9 +1,6 @@
 #!/bin/bash
 
 nds_rom=""
-watchdog_mode=yes
-
-
 
 # If preferred ROM exists, use it
 if [ -f "$preferred_rom" ]; then
@@ -12,6 +9,7 @@ if [ -f "$preferred_rom" ]; then
     echo "Using preferred ROM: $preferred_rom"
 else
   # Otherwise, search for first .nds file in directory
+  ls /roms
   search_dir="/roms"
   nds_files=($(find "$search_dir" -maxdepth 1 -type f -name '*.nds'))
 
@@ -28,9 +26,5 @@ else
 fi
 
 
-if [ ${watchdog_mode}==yes ]; then
-  desmume-cli ${nds_rom} --cflash-image /fs/fat.img ${suffix}  # Run in background to watchdog-entrypoint.sh exit-code
-else
-  desmume-cli ${nds_rom} --cflash-image /fs/fat.img ${suffix}
-fi
+desmume-cli ${nds_rom} --cflash-image /fs/fat.img
 

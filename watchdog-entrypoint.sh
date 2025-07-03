@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 TARGET_CONTAINER="runner-cli"
 CONDITION_FILE="EXIT_CODE"
 IMG_PATH="/fs/fat.img"
@@ -12,6 +14,7 @@ while true; do
     if [ -f "/tmp/mountpoint/${CONDITION_FILE}" ]; then
         echo "Watchdog Condition met. Killing container: ${TARGET_CONTAINER}"
         docker kill "${TARGET_CONTAINER}"
+        rm -f "/tmp/mountpoint/${CONDITION_FILE}"
         umount "/tmp/mountpoint"
         break
     fi

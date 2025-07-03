@@ -1,6 +1,7 @@
 #!/bin/bash
 
 nds_rom=""
+set -e
 
 # If preferred ROM exists, use it
 if [ -f "$preferred_rom" ]; then

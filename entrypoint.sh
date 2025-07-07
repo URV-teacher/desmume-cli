@@ -10,7 +10,6 @@ if [ -f "$preferred_rom" ]; then
     echo "Using preferred ROM: $preferred_rom"
 else
   # Otherwise, search for first .nds file in directory
-  ls /roms
   search_dir="/roms"
   nds_files=($(find "$search_dir" -maxdepth 1 -type f -name '*.nds'))
 
